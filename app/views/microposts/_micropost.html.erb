@@ -11,5 +11,8 @@ Posted <%= time_ago_in_words(micropost.created_at) %> ago.
                     :confirm => "You sure?",
                     :title => micropost.content %>
       </td>
+      <td>
+        <%= link_to "comment", micropost, :method => comment, :title => micropost.content%>
+      </td>
   <% end %>
 </tr>
