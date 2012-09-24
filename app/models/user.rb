@@ -14,15 +14,43 @@ class User < ActiveRecord::Base
 
   attr_accessor :password
   attr_accessible :email, :name, :password, :password_confirmation
-  has_many :microposts, :dependent => :destroy
 
-  validates :name, :presence => true, :length => { :maximum => 50}, :uniqueness => true
+  has_many :microposts,
+           :dependent => :destroy
+
+  has_many :relationships,
+           :foreign_key => "follower_id",
+           :dependent => :destroy
+
+  has_many :following,
+           :through => :relationships,
+           :source => :followed
+
+  has_many :reverse_relationships,
+           :foreign_key => "followed_id",
+           :class_name => "Relationship",
+           :dependent => :destroy
+
+  has_many :followers,
+           :through => :reverse_relationships,
+           :source => :follower
+
+  validates :name,
+            :presence => true,
+            :length => { :maximum => 50},
+            :uniqueness => true
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  validates :email, :presence => true, :format => { :with => email_regex}, :uniqueness => {:case_sensitive => false}
+  validates :email,
+            :presence => true,
+            :format => { :with => email_regex},
+            :uniqueness => {:case_sensitive => false}
 
-  validates :password, :presence => true, :confirmation => true, :length => { :within => 6..40}
+  validates :password,
+            :presence => true,
+            :confirmation => true,
+            :length => { :within => 6..40}
 
   before_save :encrypt_password
 
@@ -31,10 +59,8 @@ class User < ActiveRecord::Base
 
   end
 
-  def self.authenticate(email, submitted_password)
-    user = find_by_email(email)
-    return nil if user.nil?
-    return user if user.has_password?(submitted_password)
+  def feed
+    Micropost.from_users_followed_by(self)
   end
 
   private
@@ -67,6 +93,16 @@ class User < ActiveRecord::Base
     (user && user.salt == cookie_salt) ? user : nil
   end
 
+  def following?(followed)
+    relationships.find_by_followed_id(followed)
+  end
+
+  def follow!(followed)
+    relationships.create!(:followed_id => followed.id)
+  end
+
+  def unfollow!(followed)
+    relationships.find_by_followed_id(followed).destroy
+  end
+
 end
-
-
