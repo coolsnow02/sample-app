@@ -71,12 +71,7 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
-  def show_follow(action)
-    @title = action.to_s.capitalize
-    @user = User.find(params[:id])
-
-
-    private
+  private
 
   def correct_user
     @user = User.find(params[:id])
