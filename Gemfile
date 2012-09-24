@@ -8,7 +8,6 @@ gem 'rails', '3.2.8'
 gem 'sqlite3'
 gem 'gravatar_image_tag', '0.1.0'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -23,6 +22,7 @@ end
 
 group :development do
   gem 'annotate', '2.5.0'
+  gem 'faker', '0.3.1'
 end
 
 
