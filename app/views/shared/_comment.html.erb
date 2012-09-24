@@ -1,3 +1,8 @@
 <li>
   <%= link_to micropost.content, user%>
+  <% if current_user.admin? %>
+    <div class="comment">
+        <textarea class="comment_text">comment here...</textarea>
+      <input type="submit" class="comment" value="comment"/>
+    </div>
 </li>

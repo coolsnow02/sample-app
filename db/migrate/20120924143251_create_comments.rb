@@ -1,10 +1,14 @@
 class CreateComments < ActiveRecord::Migration
-  def change
+  def self.up
     create_table :comments do |t|
       t.string :content
       t.integer :user_id
 
       t.timestamps
     end
+  end
+
+  def self.down
+    drop_table :comments
   end
 end
