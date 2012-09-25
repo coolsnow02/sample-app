@@ -6,10 +6,6 @@
 
   <td class="micropost">
 
-    <span class="user">
-        <%= link_to feed_item.user.name, feed_item.user %>
-    </span>
-
     <span class="content"><%= feed_item.content %></span>
 
     <span class="timestamp">
@@ -17,19 +13,6 @@
     </span>
   </td>
 
-  <% if current_user?(feed_item.user) %>
 
-   <td>
-     <%= link_to "delete", feed_item, :method => :delete,
-                    :confirm => "You sure?",
-                    :title => feed_item.content %>
-     </td>
-
-      <td>
-        <%= link_to "comment", feed_item, :method => :delete,
-                    :title => feed_item.content %>
-      </td>
-
-  <% end %>
 </tr>
 

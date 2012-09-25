@@ -13,9 +13,23 @@ class MicropostsController < ApplicationController
     end
   end
 
+  def comment
+    @comment.create
+    redirect_back_or root_path
+  end
+
   def destroy
     @micropost.destroy
+    @comment.destroy
     redirect_back_or root_path
+  end
+
+  def show
+    @micropost = Micropost.find(params[:id])
+    @comment = @micropost.comments.new
+
+    @comments=@micropost.comments
+
   end
 
   private

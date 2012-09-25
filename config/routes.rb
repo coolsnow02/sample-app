@@ -3,9 +3,17 @@ SampleApp::Application.routes.draw do
 
   resources :sessions, :only => [:new, :create, :destroy]
 
-  resources :microposts, :only => [:create, :destroy]
+  resources :microposts do
+    resources :comments do
+      collection do
+       post :add_comment
+        end
+    end
+  end
 
   resources :relationships, :only => [:create, :destroy]
+
+  resources :comments, :only => [:create, :destroy]
 
   resources :users do
     member do
@@ -14,8 +22,6 @@ SampleApp::Application.routes.draw do
   end
 
   get "sessions/new"
-
-  resources :users
 
   get "users/new"
 

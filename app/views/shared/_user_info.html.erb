@@ -1,9 +1,9 @@
-<div class="user_info">
+<div class="user_info" xmlns="http://www.w3.org/1999/html">
   <a href="<%= user_path(current_user) %>">
 
     <span class="user_name">
         <%= current_user.name %>
-    </span>
+    </span>  </br></br>
 
     <span class="microposts">
         <%= pluralize(current_user.microposts.count, "micropost") %>

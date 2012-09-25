@@ -1,0 +1,29 @@
+<tr>
+  <td class="micropost">
+    <span class="content"><%= @micropost.content %></span>
+        <span class="timestamp">
+            Posted <%= time_ago_in_words(@micropost.created_at) %> ago.
+        </span>
+  </td>
+
+    <ul>
+        <%@comments.each do |i| %>
+            <li>
+                <%= i.content%>
+            </li>
+         <%end%>
+    </ul>
+
+    <div id="new_comment">
+
+        <%= form_for @comment, :url => add_comment_micropost_comments_path(@micropost.id) do |f| %>
+            <div class="field">
+                <%= f.label :content %><br />
+                <%= f.text_field :content %>
+            </div>
+
+            <div class="actions">
+                <%= submit_tag "Submit" %>
+            </div>
+        <% end %>
+    </div>

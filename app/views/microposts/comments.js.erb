@@ -1,0 +1,17 @@
+var form= $('#new_comment')
+    <% if @comment.errors.any? %>
+
+    var errors = $('<ul/>');
+
+    <% @comment.errors.full_messages.each do |error|%>
+    errors.append('<li><%= escape_javascript(error)%></li>');
+    <%end%>
+
+    $('<div>').addClass('.errors').html(errors).prependTo("#new_comment")
+
+    <%else%>
+    $("#comments-container").prepend('<%= j(render(:partial => "comment", :object => "@comment"))%>');
+
+    form.find('input:text, textarea').val('');
+
+<%end%>
