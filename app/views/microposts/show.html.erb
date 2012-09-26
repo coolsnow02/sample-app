@@ -1,29 +1,20 @@
-<tr>
+<tr xmlns="http://www.w3.org/1999/html">
   <td class="micropost">
-    <span class="content"><%= @micropost.content %></span>
+    <span class="content"><%= @micropost.content %></span></br></br>
         <span class="timestamp">
             Posted <%= time_ago_in_words(@micropost.created_at) %> ago.
-        </span>
+    </span>
   </td>
 
-    <ul>
-        <%@comments.each do |i| %>
-            <li>
-                <%= i.content%>
-            </li>
-         <%end%>
-    </ul>
+<div id="new_comment">
 
-    <div id="new_comment">
+  <%= form_for [@micropost, @micropost.comments.build], :url => comments_path, :remote => true, :html => { :'data-type' => 'html', :id => 'add_comment_micropost_comments' } do |f| %>
+      <%= f.text_area(:content) %>
+      <div class="validation-error"></div>
+      <%= f.submit %>
+  <% end %>
 
-        <%= form_for @comment, :url => add_comment_micropost_comments_path(@micropost.id) do |f| %>
-            <div class="field">
-                <%= f.label :content %><br />
-                <%= f.text_field :content %>
-            </div>
+  <div id="comments"></div>
+</div>
 
-            <div class="actions">
-                <%= submit_tag "Submit" %>
-            </div>
-        <% end %>
-    </div>
+

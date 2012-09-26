@@ -1,39 +1,34 @@
+<!--<tr>-->
+  <!--<td class="micropost">-->
+    <!--<span class="content"><%= micropost.content %></span>-->
+<!--<span class="timestamp">-->
+<!--Posted <%= time_ago_in_words(micropost.created_at) %> ago.-->
+<!--</span>-->
+  <!--</td>-->
+  <!--<%= render :partial => "shared/comment", locals: { micropost: @micropost }  %>-->
+
+  <!--<% if current_user.id == micropost.user_id %>-->
+      <!--<td>-->
+        <%= link_to "delete", micropost, :method => :delete,
+#                    :confirm => "You sure?",
+                    :title => micropost.content %>
+      <!--</td>-->
+      <!--<td>-->
+        <!--<%= link_to "comment", micropost_path(micropost) %>-->
+      <!--</td>-->
+  <!--<% end %>-->
+<!--</tr>-->
+
+
 <tr>
   <td class="micropost">
-    <span class="content"><%= micropost.content %></span>
-<span class="timestamp">
-Posted <%= time_ago_in_words(micropost.created_at) %> ago.
-</span>
+    <span class="content"><%= wrap(micropost.content) %></span>
+    <span class="timestamp">
+    Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+    </span>
+    <%= render 'shared/comment_show', locals: { micropost: @micropost }   %>
+    <div id="comments">
+      <%= render micropost.comments %>
+    </div>
   </td>
-  <%= render :partial => "shared/comment", locals: { micropost: @micropost }  %>
-
-  <% if current_user.id == micropost.user_id %>
-      <td>
-        <%= link_to "delete", micropost, :method => :delete,
-                    :confirm => "You sure?",
-                    :title => micropost.content %>
-      </td>
-      <%= link_to "show", micropost_path(micropost) %>
-      <td>
-      </td>
-  <% end %>
 </tr>
-
-<div id="new_comment">
-  <!--<%#= form_for [comment], :as => post, :url => add_comment_micropost_comments_path(Micropost.id) do |f| %>-->
-      <!--<div class="field">-->
-        <%#= f.label :name %><br />
-        <!--<%#= f.text_field :name %>-->
-      <!--</div>-->
-      <!--<div class="field">-->
-        <%#= f.label :body, "Comment" %><br />
-        <!--<%#= f.text_area :body %>-->
-      <!--</div>-->
-      <!--<div class="actions">-->
-        <!--<%#= submit_tag "Submit" %>-->
-      <!--</div>-->
-  <!--<%# end %>-->
-</div>
-<div id="comments-container">
-  <%#= render :partial => @comments %>
-</div>

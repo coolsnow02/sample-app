@@ -6,7 +6,7 @@ SampleApp::Application.routes.draw do
   resources :microposts do
     resources :comments do
       collection do
-       post :add_comment
+       post :add_comments
         end
     end
   end

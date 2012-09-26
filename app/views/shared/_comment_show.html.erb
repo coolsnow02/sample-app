@@ -1,18 +1,34 @@
-<ul>
-  <td class="comment">
-    <span class="content"><%= Comment.content %></span>
-<span class="timestamp">
-Commented <%= time_ago_in_words(Comment.created_at) %> ago.
-</span>
-  </td>
-  <% if current_user?(Comment.user) %>
-      <td>
+<!--<ul>-->
+  <!--<td class="comment">-->
+    <!--<span class="content"><%= Comment.content %></span>-->
+<!--<span class="timestamp">-->
+<!--Commented <%= time_ago_in_words(Comment.created_at) %> ago.-->
+<!--</span>-->
+  <!--</td>-->
+  <!--<% if current_user?(Comment.user) %>-->
+      <!--<td>-->
         <%= link_to "delete", Comment, :method => :delete,
-                    :confirm => "You sure?",
+#                    :confirm => "You sure?",
                     :title => micropost.content %>
-      </td>
-      <td>
-        <%= link_to "Comment", new_comment_path, :remote => true %>
-      </td>
-  <% end %>
-</ul>
+      <!--</td>-->
+      <!--<td>-->
+        <!--<%= link_to "Comment", new_comment_path, :remote => true %>-->
+      <!--</td>-->
+  <!--<% end %>-->
+<!--</ul>-->
+
+<!--<%= form_for ([micropost, @comment]), :remote => true do |f| %>-->
+    <!--<%= render 'shared/error_messages', object: f.object %>-->
+    <!--<%= f.text_area :comment_content, :size => "40x2" %>-->
+    <!--<button class="btn" type="submit">-->
+      <!--Comment-->
+    <!--</button>-->
+<!--<% end %>-->
+
+<%= form_for ([micropost, @comment]), :remote => true do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= f.text_area :comment_content, :size => "40x2" %>
+    <button class="btn" type="submit">
+      Comment
+    </button>
+<% end %>
