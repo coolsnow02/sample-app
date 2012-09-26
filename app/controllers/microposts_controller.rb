@@ -29,7 +29,6 @@ class MicropostsController < ApplicationController
     @comment = @micropost.comments.new
 
     @comments=@micropost.comments
-
   end
 
   private

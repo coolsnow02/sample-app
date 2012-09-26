@@ -24,9 +24,9 @@ class CommentsController < ApplicationController
   end
 
   def add_comment
-       @micropost = Micropost.find(params[:micropost_id])
-       @comment= @micropost.comments.create(:content => params[:comment][:content])
-       redirect_to micropost_path(@micropost)
+    @micropost = Micropost.find(params[:micropost_id])
+    @comment= @micropost.comments.create(:content => params[:comment][:content])
+    redirect_to micropost_path(@micropost)
   end
 
 end
